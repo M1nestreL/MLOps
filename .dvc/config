@@ -2,3 +2,5 @@
     remote = ssh-storage
 ['remote "ssh-storage"']
     url = ssh://data-srv@192.168.56.102/datasets
+    user = vboxuser
+    port = 22
