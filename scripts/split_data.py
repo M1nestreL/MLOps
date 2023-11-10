@@ -38,14 +38,15 @@ X_train = preprocessors.transform(X) # Преобразуем  трениров�
 
 # Разбиваем тренировочные данные на тренировочную и валидационную выборку
 X_Train, X_val, y_Train, y_val = train_test_split(X_train, y.values.ravel(), test_size=p_split_ratio, random_state=44)
+print(X_Train.shape, X_val.shape, y_Train.shape, y_val.shape)
 
-os.makedirs(os.path.join("data", "stage2"),exist_ok=True)
+os.makedirs(os.path.join("datasets", "stage2"),exist_ok=True)
 
-with open('data/stage2/X_train.npy', 'wb') as f:
-    np.save(f, X_train)
-with open('data/stage2/X_val.npy', 'wb') as f:
+with open('datasets/stage2/X_Train.npy', 'wb') as f:
+    np.save(f, X_Train)
+with open('datasets/stage2/X_val.npy', 'wb') as f:
     np.save(f, X_val)
-with open('data/stage2/y_Train.npy', 'wb') as f:
+with open('datasets/stage2/y_Train.npy', 'wb') as f:
     np.save(f, y_Train)
-with open('data/stage2/y_val.npy', 'wb') as f:
+with open('datasets/stage2/y_val.npy', 'wb') as f:
     np.save(f, y_val)

@@ -5,9 +5,9 @@ import json
 import numpy as np
 
 
-with open('data/stage2/X_val.npy', 'rb') as f:
+with open('datasets/stage2/X_val.npy', 'rb') as f:
     X_val = np.load(f, allow_pickle=True)
-with open('data/stage2/y_val.npy', 'rb') as f:
+with open('datasets/stage2/y_val.npy', 'rb') as f:
     y_val = np.load(f, allow_pickle=True)
 model = pickle.load(open('models/model.pkl', 'rb'))
 

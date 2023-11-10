@@ -1,0 +1,87 @@
+schema: '2.0'
+stages:
+  load_data:
+    cmd: python3 scripts/load_data.py datasets/Car_Insurance_Claim.csv
+    deps:
+    - path: datasets/Car_Insurance_Claim.csv
+      hash: md5
+      md5: 856032a9c1a29fd96ba02b60272cc651
+      size: 1270123
+    - path: scripts/load_data.py
+      hash: md5
+      md5: 2f09158cc69c8bfe577e7d9e4a215cf8
+      size: 323
+    outs:
+    - path: datasets/stage1
+      hash: md5
+      md5: 8f22fc8178e2d42bd0ac8e93372fd822.dir
+      size: 1265121
+      nfiles: 2
+  split_data:
+    cmd: python3 scripts/split_data.py datasets/stage1/X.csv datasets/stage1/y.csv
+    deps:
+    - path: datasets/stage1/X.csv
+      hash: md5
+      md5: 0971f63f18a3b0d64c5316b105add89a
+      size: 1225113
+    - path: datasets/stage1/y.csv
+      hash: md5
+      md5: 628dad435c3ea4f286360e8e6fd66928
+      size: 40008
+    - path: scripts/split_data.py
+      hash: md5
+      md5: 1648881d6ec0a09bf7fe94507ab7a9eb
+      size: 2128
+    params:
+      params.yaml:
+        split.split_ratio: 0.3
+    outs:
+    - path: datasets/stage2
+      hash: md5
+      md5: 3db8c865063df22e06983a9479ca2ffd.dir
+      size: 2400512
+      nfiles: 4
+  model_preprocessing:
+    cmd: python3 scripts/model_preprocessing.py datasets/stage2/X_Train.npy datasets/stage2/y_Train.npy
+    deps:
+    - path: datasets/stage2/X_Train.npy
+      hash: md5
+      md5: 7fd203683dea6678f346aa07d9bc2711
+      size: 1624128
+    - path: datasets/stage2/y_Train.npy
+      hash: md5
+      md5: 398b9c516a3dbf7606c73a6c7a5a5d1a
+      size: 56128
+    - path: scripts/model_preprocessing.py
+      hash: md5
+      md5: d50ab139732baf772c14d88dc561ce4b
+      size: 765
+    outs:
+    - path: models/model.pkl
+      hash: md5
+      md5: e3022ced28cfa0d7132895eb677c0a27
+      size: 623640
+  model_testing:
+    cmd: python3 scripts/model_testing.py
+    deps:
+    - path: datasets/stage2/X_val.npy
+      hash: md5
+      md5: 5b53bf817f7ced96f4993f247b519773
+      size: 696128
+    - path: datasets/stage2/y_val.npy
+      hash: md5
+      md5: ec7411f5c4465807d2f157f68eef19b0
+      size: 24128
+    - path: models/model.pkl
+      hash: md5
+      md5: e3022ced28cfa0d7132895eb677c0a27
+      size: 623640
+    - path: scripts/model_testing.py
+      hash: md5
+      md5: 3b4462ea20387882dd229bbab27f33d2
+      size: 503
+    outs:
+    - path: evaluate/score.json
+      hash: md5
+      md5: c20ac402d2e52d006198f292d00307c1
+      size: 16

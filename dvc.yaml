@@ -6,3 +6,31 @@ stages:
     - scripts/load_data.py
     outs:
     - datasets/stage1
+  split_data:
+    cmd: python3 scripts/split_data.py datasets/stage1/X.csv datasets/stage1/y.csv
+    deps:
+    - datasets/stage1/X.csv
+    - datasets/stage1/y.csv
+    - scripts/split_data.py
+    params:
+    - split.split_ratio
+    outs:
+    - datasets/stage2
+  model_preprocessing:
+    cmd: python3 scripts/model_preprocessing.py datasets/stage2/X_Train.npy datasets/stage2/y_Train.npy
+    deps:
+    - datasets/stage2/y_Train.npy
+    - datasets/stage2/X_Train.npy
+    - scripts/model_preprocessing.py
+    outs:
+    - models/model.pkl
+  model_testing:
+    cmd: python3 scripts/model_testing.py
+    deps:
+    - datasets/stage2/X_val.npy
+    - datasets/stage2/y_val.npy
+    - scripts/model_testing.py
+    - models/model.pkl
+    metrics:
+    - evaluate/score.json:
+        cache: false
