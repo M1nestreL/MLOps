@@ -1,7 +1,7 @@
 split:
-  split_ratio: 0.3
+  split_ratio: 0.4
 train:
-  C: 100
+  C: 50
   coef0: 1.5
   degree: 2
   gamma: 0.2

@@ -34,11 +34,11 @@ stages:
       size: 2128
     params:
       params.yaml:
-        split.split_ratio: 0.3
+        split.split_ratio: 0.4
     outs:
     - path: datasets/stage2
       hash: md5
-      md5: 3db8c865063df22e06983a9479ca2ffd.dir
+      md5: 03d29e118bad46ebeb25c59ce78c4404.dir
       size: 2400512
       nfiles: 4
   model_preprocessing:
@@ -46,12 +46,12 @@ stages:
     deps:
     - path: datasets/stage2/X_Train.npy
       hash: md5
-      md5: 7fd203683dea6678f346aa07d9bc2711
-      size: 1624128
+      md5: 689dfd61b39fbc9eaf766ab7e6162242
+      size: 1392128
     - path: datasets/stage2/y_Train.npy
       hash: md5
-      md5: 398b9c516a3dbf7606c73a6c7a5a5d1a
-      size: 56128
+      md5: 26867a2600c367499588c9c443b40015
+      size: 48128
     - path: scripts/model_preprocessing.py
       hash: md5
       md5: d50ab139732baf772c14d88dc561ce4b
@@ -59,23 +59,23 @@ stages:
     outs:
     - path: models/model.pkl
       hash: md5
-      md5: e3022ced28cfa0d7132895eb677c0a27
-      size: 623640
+      md5: e78c8def9123db3a227bbc17a96ccbf0
+      size: 540480
   model_testing:
     cmd: python3 scripts/model_testing.py
     deps:
     - path: datasets/stage2/X_val.npy
       hash: md5
-      md5: 5b53bf817f7ced96f4993f247b519773
-      size: 696128
+      md5: fdca236e66ca2fdc09af68727390abb0
+      size: 928128
     - path: datasets/stage2/y_val.npy
       hash: md5
-      md5: ec7411f5c4465807d2f157f68eef19b0
-      size: 24128
+      md5: 3fddb615f33df80670586b4ee1eab32e
+      size: 32128
     - path: models/model.pkl
       hash: md5
-      md5: e3022ced28cfa0d7132895eb677c0a27
-      size: 623640
+      md5: e78c8def9123db3a227bbc17a96ccbf0
+      size: 540480
     - path: scripts/model_testing.py
       hash: md5
       md5: 3b4462ea20387882dd229bbab27f33d2
@@ -83,5 +83,5 @@ stages:
     outs:
     - path: evaluate/score.json
       hash: md5
-      md5: c20ac402d2e52d006198f292d00307c1
-      size: 16
+      md5: ca238db36c958a4a6e66f8ad186bb456
+      size: 18
