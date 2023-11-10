@@ -1,0 +1,8 @@
+stages:
+  load_data:
+    cmd: python3 scripts/load_data.py datasets/Car_Insurance_Claim.csv
+    deps:
+    - datasets/Car_Insurance_Claim.csv
+    - scripts/load_data.py
+    outs:
+    - datasets/stage1
